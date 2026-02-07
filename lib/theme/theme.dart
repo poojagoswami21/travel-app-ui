@@ -1,0 +1,104 @@
+import 'package:flutter/material.dart';
+
+ThemeData get lightTheme => ThemeData(
+  useMaterial3: true,
+  colorScheme: ColorScheme.light(
+    primary: const Color(0xFF5E29CD),
+    secondary: const Color(0xFF000000),
+    tertiary: const Color(0xFFE0E0E0),
+    surface: const Color(0xFFFFFFFF),
+    background: const Color(0xFFFFFFFF),
+    error: const Color(0xFFD32F2F),
+    onPrimary: const Color(0xFF000000),
+    onSecondary: const Color(0xFFFFFFFF),
+    onTertiary: const Color(0xFF000000),
+    onSurface: const Color(0xFF000000),
+    onBackground: const Color(0xFF000000),
+    onError: const Color(0xFFFFFFFF),
+    outline: const Color(0xFFBDBDBD),
+  ),
+  brightness: Brightness.light,
+  scaffoldBackgroundColor: Colors.white,
+  appBarTheme: const AppBarTheme(
+    backgroundColor: Color(0xFF5E29CD),
+    foregroundColor: Colors.black,
+    elevation: 0,
+    centerTitle: true,
+  ),
+   cardTheme: CardThemeData(
+    elevation: 1.5,
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+    color: Colors.white,
+    surfaceTintColor: Colors.white,
+  ),
+  outlinedButtonTheme: OutlinedButtonThemeData(
+    style: OutlinedButton.styleFrom(
+      foregroundColor: Colors.black,
+      side: const BorderSide(color: Colors.black),
+    ),
+  ),
+  iconTheme: const IconThemeData(color: Colors.black),
+  bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+    backgroundColor: Colors.white,
+    selectedItemColor: Color(0xFF5E29CD),
+    unselectedItemColor: Colors.black54,
+  ),
+);
+
+ThemeData get darkTheme => ThemeData(
+  useMaterial3: true,
+  colorScheme: ColorScheme.dark(
+    primary: const Color(0xFF5E29CD),
+    secondary: const Color(0xFFFFFFFF),
+    tertiary: const Color(0xFFBDBDBD),
+    surface: const Color(0xFF121212),
+    background: const Color(0xFF121212),
+    error: const Color(0xFFD32F2F),
+    onPrimary: const Color(0xFF000000),
+    onSecondary: const Color(0xFF000000),
+    onTertiary: const Color(0xFF000000),
+    onSurface: const Color(0xFFFFFFFF),
+    onBackground: const Color(0xFFFFFFFF),
+    onError: const Color(0xFFFFFFFF),
+    outline: const Color(0xFF424242),
+  ),
+  brightness: Brightness.dark,
+  scaffoldBackgroundColor: const Color(0xFF121212),
+  appBarTheme: const AppBarTheme(
+    backgroundColor: Color(0xFF5E29CD),
+    foregroundColor: Colors.white,
+    elevation: 0,
+    centerTitle: true,
+  ),
+   cardTheme: CardThemeData(
+    elevation: 0,
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+    color: const Color(0xFF1E1E1E),
+    surfaceTintColor: const Color(0xFF1E1E1E),
+    shadowColor: Colors.black.withOpacity(0.2),
+  ),
+  elevatedButtonTheme: ElevatedButtonThemeData(
+    style: ElevatedButton.styleFrom(
+      backgroundColor: const Color(0xFF5E29CD),
+      foregroundColor: Colors.black,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+    ),
+  ),
+  outlinedButtonTheme: OutlinedButtonThemeData(
+    style: OutlinedButton.styleFrom(
+      foregroundColor: Colors.white,
+      side: const BorderSide(color: Colors.white),
+    ),
+  ),
+  iconTheme: const IconThemeData(color: Colors.white),
+  bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+    backgroundColor: Color(0xFF1F1F1F),
+    selectedItemColor: Color(0xFF5E29CD),
+    unselectedItemColor: Colors.white70,
+  ),
+);
+extension CustomColors on ColorScheme {
+  Color get onPromoOffer => brightness == Brightness.dark
+      ? Colors.yellow
+      : Colors.brown;
+}

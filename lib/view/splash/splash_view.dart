@@ -1,0 +1,128 @@
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../../router/app_router.dart';
+import 'provider/splash_provider.dart';
+
+class SplashView extends StatefulWidget {
+  const SplashView({super.key});
+
+  @override
+  State<SplashView> createState() => _SplashViewState();
+}
+
+class _SplashViewState extends State<SplashView>
+    with TickerProviderStateMixin {
+
+  bool showBG = true;
+  bool showPalm = true;
+
+  late AnimationController waveController;
+  late Animation<double> waveTop;
+
+  late Animation<double> logoFade;
+
+  bool initialized = false;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (!initialized) {
+      initialized = true;
+      final screenHeight = MediaQuery.of(context).size.height;
+      waveController = AnimationController(
+        vsync: this,
+        duration: const Duration(milliseconds: 1800),
+      );
+
+      waveTop = Tween<double>(
+        begin: 0,
+        end: -screenHeight,
+      ).animate(
+        CurvedAnimation(
+          parent: waveController,
+          curve: Curves.easeInOut,
+        ),
+      );
+      logoFade = CurvedAnimation(
+        parent: waveController,
+        curve: const Interval(
+          0.35, 1.0,
+          curve: Curves.easeIn,
+        ),
+      );
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _startSequence();
+  }
+
+  Future<void> _startSequence() async {
+    await Future.delayed(const Duration(milliseconds: 1700));
+    setState(() {
+      showBG = false;
+      showPalm = false;
+    });
+    waveController.forward().whenComplete(() {
+      Provider.of<SplashProvider>(context, listen: false)
+          .setAnimationCompleted(true);
+
+      Navigator.pushReplacementNamed(context, AppRouter.mainView);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    return Scaffold(
+      body: Stack(
+        children: [
+          if (showBG)
+            Positioned.fill(
+              child: Image.asset(
+                "assets/icons/icon_splash_bg.png",
+                fit: BoxFit.cover,
+              ),
+            ),
+          if (showPalm)
+            Positioned(
+              bottom: 0,
+              left: 0,
+              right: 0,
+              child: Image.asset(
+                "assets/icons/icon_plam_splash.png",
+                width: width * 0.55,
+              ),
+            ),
+          if (!showBG)
+            AnimatedBuilder(
+              animation: waveController,
+              builder: (_, __) {
+                return Positioned(
+                  top: waveTop.value,
+                  left: 0,
+                  right: 0,
+                  child: Image.asset(
+                    "assets/icons/icon_wave_splash.png",
+                    width: width,
+                    fit: BoxFit.fill,
+                  ),
+                );
+              },
+            ),
+          Center(
+            child: FadeTransition(
+              opacity: logoFade,
+              child: Image.asset(
+                "assets/icons/icon_logo.png",
+                width: 140,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}

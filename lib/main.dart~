@@ -1,0 +1,39 @@
+import 'package:flutter/material.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
+
+import 'package:pooja_goswami_flutter_practical_task/router/app_router.dart';
+import 'package:pooja_goswami_flutter_practical_task/theme/theme.dart';
+import 'package:pooja_goswami_flutter_practical_task/view/splash/provider/splash_provider.dart';
+import 'package:provider/provider.dart';
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => SplashProvider()),
+      ],
+      child: const MyApp(),
+    ),
+  );
+}
+
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
+      initialRoute: AppRouter.splashScreen,
+      onGenerateRoute: AppRouter.onGenerateRoute,
+      theme: lightTheme,
+      themeMode: ThemeMode.light,
+      darkTheme: lightTheme,
+      navigatorKey: navigatorKey,
+    );
+  }
+}

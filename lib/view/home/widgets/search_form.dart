@@ -1,0 +1,78 @@
+import 'package:flutter/material.dart';
+import 'package:pooja_goswami_flutter_practical_task/view/home/provider/home_provider.dart';
+import 'package:pooja_goswami_flutter_practical_task/view/home/widgets/home_input_field.dart';
+import 'package:pooja_goswami_flutter_practical_task/view/home/widgets/home_top_menu.dart';
+import 'package:pooja_goswami_flutter_practical_task/view/home/widgets/primary_button.dart';
+import 'package:provider/provider.dart';
+
+import '../../../animation/fade_slide_widget.dart';
+
+class SearchForm extends StatelessWidget {
+  const SearchForm({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final home = Provider.of<HomeProvider>(context);
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: const BorderRadius.only(
+          bottomLeft: Radius.circular(30),
+          bottomRight: Radius.circular(30),
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.06),
+            blurRadius: 8,
+            offset: const Offset(0, 2),
+          ),
+        ],
+      ),
+      child: Column(
+        children: [
+          FadeSlideWidget(
+            delay: const Duration(milliseconds: 100),
+            child: HomeTopMenu(),
+          ),
+          const SizedBox(height: 20),
+          FadeSlideWidget(
+            delay: const Duration(milliseconds: 180),
+            child: HomeInputField(
+              icon: Icons.place_outlined,
+              label: "Destination",
+              value: home.destination,
+              onTap: () {},
+            ),
+          ),
+          FadeSlideWidget(
+            delay: const Duration(milliseconds: 260),
+            child: HomeInputField(
+              icon: Icons.calendar_month_outlined,
+              label: "Date",
+              value: home.dateRange,
+              onTap: () {},
+            ),
+          ),
+          FadeSlideWidget(
+            delay: const Duration(milliseconds: 340),
+            child: HomeInputField(
+              icon: Icons.people_outline,
+              label: "Travelers",
+              value: home.travelers,
+              onTap: () {},
+            ),
+          ),
+          const SizedBox(height: 10),
+          FadeSlideWidget(
+            delay: const Duration(milliseconds: 420),
+            child: PrimaryButton(
+              text: "Search",
+              onTap: () {},
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}

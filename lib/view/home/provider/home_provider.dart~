@@ -1,0 +1,49 @@
+import 'package:flutter/cupertino.dart';
+
+class HomeProvider extends ChangeNotifier {
+  String destination = "Dubai, United Arab Emirates";
+  String dateRange = "1 July - 3 July";
+  String travelers = "2 Travelers • 1 room";
+
+  int selectedMenuIndex = 0;
+
+  List<RecentSearch> recentSearches = [
+    RecentSearch(
+      category: "Hotels",
+      title: "Dubai",
+      date: "12 Aug - 25 Aug",
+      travelers: "1 Room • 2 travellers",
+    ),
+    RecentSearch(
+      category: "Flights",
+      title: "Dubai.. to Delhi (DEL)",
+      date: "12 Aug - 25 Aug",
+      travelers: "2 travellers",
+    ),
+  ];
+
+  void addRecentSearch(RecentSearch item) {
+    recentSearches.insert(0, item);
+    notifyListeners();
+  }
+
+  void updateSelectedMenu(int index) {
+    selectedMenuIndex = index;
+    notifyListeners();
+  }
+
+  void updateDestination(String value) {
+    destination = value;
+    notifyListeners();
+  }
+
+  void updateDateRange(String value) {
+    dateRange = value;
+    notifyListeners();
+  }
+
+  void updateTravelers(String value) {
+    travelers = value;
+    notifyListeners();
+  }
+}
