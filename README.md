@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # pooja_goswami_flutter_practical_task
 
 A new Flutter project.
@@ -14,3 +15,6 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+=======
+# travel-app-ui
+>>>>>>> eead39b53dd58fe4906e968650a7be19b97623c8
